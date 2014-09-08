@@ -9,9 +9,14 @@ namespace TaskRunner.Unity
 
         private bool _paused;
 
-        public TaskRunner(MonoBehaviour host)
+        private TaskRunner(MonoBehaviour host)
         {
             _host = host;
+        }
+
+        public static ITaskRunner Create(MonoBehaviour host)
+        {
+            return new TaskRunner(host);
         }
 
         public ITask Run(IEnumerator enumerator, bool start)

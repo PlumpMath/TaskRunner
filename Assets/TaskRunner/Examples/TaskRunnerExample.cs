@@ -11,8 +11,9 @@ namespace TaskRunner.Examples
 
         private void Awake()
         {
-            ITaskRunner runner1 = new Unity.TaskRunner(this);
-            ITaskRunner runner2 = new Unity.TaskRunner(this);
+            var runner1 = Unity.TaskRunner.Create(this);
+
+            var runner2 = Unity.TaskRunner.Create(this);
 
             var recursiveTask = runner1.Run(
                   RecursiveIncrement()
