@@ -2,6 +2,7 @@
 
 namespace TaskRunner
 {
+    public delegate void StartedH();
     public delegate void FinishedH(bool cancelled);
 
     public interface ITask
@@ -13,6 +14,7 @@ namespace TaskRunner
 
         bool IsRunning();
 
+        event StartedH  Started;
         event FinishedH Finished;
     }
 

@@ -4,6 +4,7 @@ namespace TaskRunner
 {
     public class Task : ITaskInternal
     {
+        public event StartedH  Started;
         public event FinishedH Finished;
 
         private readonly ITaskHost   _host;
@@ -34,6 +35,12 @@ namespace TaskRunner
                 _running = true;
 
                 _host.Start(this);
+
+                var startedH = Started;
+                if (startedH != null)
+                {
+                    startedH();
+                }
             }
         }
 
