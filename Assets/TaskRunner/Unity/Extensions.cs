@@ -12,7 +12,6 @@ namespace TaskRunner.Unity
             , Action action
             )
         {
-            var now = DateTime.Now.Second;
             return runner.Run(
                 _Schedule(t, action: action)
                 );

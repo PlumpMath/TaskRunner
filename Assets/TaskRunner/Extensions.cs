@@ -23,5 +23,35 @@ namespace TaskRunner
                 yield return null;
             }
         }
+
+        public static ITask While(
+              this ITaskRunner runner
+            , Func<bool> condition
+            , Action action
+            , Action then=null
+            , bool start = true
+            )
+        {
+            return runner.Run(_While(condition, action, then), start);
+        }
+
+        private static IEnumerator _While(
+              Func<bool> condition
+            , Action action
+            , Action then=null
+            )
+        {
+            while (condition())
+            {
+                action();
+
+                yield return null;
+            }
+
+            if (then != null)
+            {
+                then();
+            }
+        }
     }
 }
