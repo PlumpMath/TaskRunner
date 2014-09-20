@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 
 namespace TaskRunner
 {
-    public interface ITaskRunner
+    public interface ITaskRunner : IDisposable
     {
         ITask Run(IEnumerator enumerator, bool start=true);
 

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace TaskRunner.Unity
@@ -8,6 +9,7 @@ namespace TaskRunner.Unity
         private readonly MonoBehaviour _host;
 
         private bool _paused;
+        private bool _disposed;
 
         private TaskRunner(MonoBehaviour host)
         {
@@ -21,6 +23,12 @@ namespace TaskRunner.Unity
 
         public ITask Run(IEnumerator enumerator, bool start)
         {
+            if (_disposed)
+            {
+                throw new ObjectDisposedException(
+                    "Cannot use disposed TaskRunner"
+                    );
+            }
             var task = new Task(
                   host       : this
                 , enumerator : enumerator
@@ -36,22 +44,40 @@ namespace TaskRunner.Unity
 
         public void Pause()
         {
+            if (_disposed)
+            {
+                throw new ObjectDisposedException(
+                    "Cannot use disposed TaskRunner"
+                    );
+            }
             _paused = true;
         }
 
         public void Resume()
         {
+            if (_disposed)
+            {
+                throw new ObjectDisposedException(
+                    "Cannot use disposed TaskRunner"
+                    );
+            }
             _paused = false;
         }
 
         public void Start(ITaskInternal task)
         {
+            if (_disposed)
+            {
+                throw new ObjectDisposedException(
+                    "Cannot use disposed TaskRunner"
+                    );
+            }
             _host.StartCoroutine(WrapTask(task.GetEnumerator()));
         }
 
         private IEnumerator WrapTask(IEnumerator enumerator)
         {
-            while (enumerator.MoveNext())
+            while (enumerator.MoveNext() && _disposed == false)
             {
                 while (_paused)
                 {
@@ -59,6 +85,11 @@ namespace TaskRunner.Unity
                 }
                 yield return enumerator.Current;
             }
+        }
+
+        public void Dispose()
+        {
+            _disposed = true;
         }
     }
 }
