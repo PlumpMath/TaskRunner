@@ -33,5 +33,29 @@ namespace TaskRunner.Unity
 
             action();
         }
+
+        public static ITask When(
+              this ITaskRunner runner
+            , Func<bool> condition
+            , Action action
+            )
+        {
+            return runner.Run(
+                _When(condition, action: action)
+                );
+        }
+
+        private static IEnumerator _When(
+              Func<bool> condition
+            , Action action
+            )
+        {
+            while (condition() == false)
+            {
+                yield return null;
+            }
+
+            action();
+        }
     }
 }
