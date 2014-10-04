@@ -62,8 +62,13 @@ namespace TaskRunner
 
         public IEnumerator GetEnumerator()
         {
-            while (_running == true)
+            while (_running)
             {
+                while (_paused)
+                {
+                    yield return null;
+                }
+
                 if (_enumerator.MoveNext())
                 {
                     // ------------------------------
