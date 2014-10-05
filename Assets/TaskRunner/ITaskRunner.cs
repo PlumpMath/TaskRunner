@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 
-namespace TaskRunner
+namespace Morfel.TaskR
 {
     public interface ITaskRunner : IDisposable
     {
@@ -15,5 +15,4 @@ namespace TaskRunner
     {
         void Start(ITaskInternal start);
     }
-
 }

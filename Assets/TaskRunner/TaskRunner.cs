@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace TaskRunner.Unity
+namespace Morfel.TaskR
 {
     public class TaskRunner : ITaskRunner, ITaskHost
     {

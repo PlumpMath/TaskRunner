@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace TaskRunner
+namespace Morfel.TaskR
 {
     public class Task : ITaskInternal
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace TaskRunner
+namespace Morfel.TaskR
 {
     public delegate void StartedH();
     public delegate void FinishedH(bool cancelled);

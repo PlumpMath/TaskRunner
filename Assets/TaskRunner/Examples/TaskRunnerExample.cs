@@ -1,8 +1,7 @@
 ﻿using System.Collections;
-using TaskRunner.Unity;
 using UnityEngine;
 
-namespace TaskRunner.Examples
+namespace Morfel.TaskR.TaskR.Examples
 {
     public class TaskRunnerExample : MonoBehaviour
     {
@@ -11,9 +10,9 @@ namespace TaskRunner.Examples
 
         private void Awake()
         {
-            var runner1 = Unity.TaskRunner.Create(this);
+            var runner1 = TaskRunner.Create(this);
 
-            var runner2 = Unity.TaskRunner.Create(this);
+            var runner2 = TaskRunner.Create(this);
 
             var recursiveTask = runner1.Run(
                   RecursiveIncrement()
